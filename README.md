@@ -1,13 +1,6 @@
 # Are Kalshi Sports Markets Well Calibrated?
 
-<!-- WRITE THIS: 1–2 sentences stating your main finding with a number.
-Facts to use:
-- 6,155 NFL, NBA, MLB and NHL games
-- prices 24 hours before close were well calibrated in all four leagues
-- no price range missed by more than random chance would explain
-- Brier score 0.233 overall vs 0.25 for guessing 50% (7% better)
--->
-Kalshi's sports prices are well calibrated. Using 6,155 NFL, NBA, MLB and NHL games, I found that prices 24 hours before close were well calibrated in all four leagues. In every price range, the gap between Kalshi's price and the actual win rate was small enough to be explained by random chance. There was an overall Brier score of 0.233 vs 0.25 for guessing 50%, a 7% improvement.
+Kalshi's sports prices are well calibrated. Using 6,155 NFL, NBA, MLB and NHL games, I found this held in all four leagues. In every price range, the gap between Kalshi's price and the actual win rate was small enough to be explained by random chance. Overall, the Brier score was 0.233, versus 0.25 for guessing 50%, a 7% improvement.
 
 ![Calibration curve](charts/calibration.png)
 
@@ -56,43 +49,25 @@ When a Kalshi market says a team has a 70% chance to win, does that team actuall
 
 ![Calibration by league](charts/calibration_by_league.png)
 
-<!-- WRITE THIS: explain what the table + league chart show, in your own words.
-Points to make:
-- all four leagues sit on the diagonal (calibrated)
-- the Brier differences track the price spread: NBA/NFL have lopsided matchups, MLB/NHL rarely go past 75%
-- so leagues differ in how PREDICTABLE they are, not in how HONEST the prices are
--->
+
+Across all four leagues, the points roughly follow the diagonal and nearly every error bar crosses the diagonal. Even so, the Brier scores range from 0.205 in the NBA to 0.244 in MLB. The difference comes from how predictable each sport is. NBA prices are spread about 2.7 times wider than MLB's (0.22 vs 0.08), because a favored team in the NBA is much more likely to win. Baseball games are often tossups, and there usually is not a big favorite. In other words, the leagues differ in how predictable they are, not in how honest the prices are.
 
 ## A trap I found: trading volume
 
-<!-- WRITE THIS: tell the story of the volume analysis.
-Facts:
-- tried testing whether heavily traded games are better priced, using volume quartiles
-- High-volume group looked badly miscalibrated (calibration error 0.080 vs ~0.02–0.04)
-- but volume_fp includes IN-GAME trading, and upsets/comebacks attract the most in-game trading
-- so "high volume" partly means "surprising outcome" — look-ahead bias
-- evidence: in the High group, 15% underdogs won 29%, 85% favorites won only 64%
-- league mix can't explain it (High group is mostly NBA, which is well calibrated on its own)
-- conclusion: total volume can't be used for this; a fair test needs volume traded BEFORE the 24h mark
--->
+I also tested whether heavily traded games are better priced by splitting games into four groups by volume quartiles. Surprisingly, the highest-volume group was the worst calibrated, with a calibration error of 0.080 compared with about 0.02-0.04 for the others. The problem is that the volume number includes in-game trading, and upsets and comebacks attract more in-game trading. So sorting games by volume partly sorts them by whether something surprising happened, a form of look-ahead bias. In the high-volume group, underdogs priced at 15% won 29%, and favorites priced at 85% won only 64%. This isn't a league effect: the high-volume group is mostly NBA games, which are well calibrated on their own. So total volume can't be used to test this. A fair test would use only the volume traded before the 24h mark.
 
 ## Limitations
 
-<!-- WRITE THIS: 3–5 bullets. Ideas:
-- only four sports, game-winner markets only
-- NFL sample is small (452 games) → wider error bars
-- MLB sample is mostly one season (listing-time change)
-- a single horizon (24h); results could differ closer to game time
-- extreme price bins have few games
--->
+* Only four sports were used, with game-winner markets only
+* There is a relatively small sample size for NFL (452 games), which gives wider error bars
+* The MLB sample is mostly one season (2026), because Kalshi listed earlier games too close to game time
+* Prices were only measured at one point (24h before close)
 
 ## What I'd do next
 
-<!-- WRITE THIS: 2–3 bullets. Ideas:
-- redo the volume test using only pre-24h volume from candlesticks
-- compare calibration at 7 days, 24 hours and 1 hour before close
-- compare Kalshi prices to sportsbook closing lines
--->
+* Redo volume test using volume traded before 24h mark from candlesticks
+* Expand prices used to 1 hour and 7 days before close
+* Compare Kalshi prices to sportsbook closing odds
 
 ## How to run
 
